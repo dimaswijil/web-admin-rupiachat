@@ -1204,6 +1204,103 @@
         cursor: not-allowed;
         pointer-events: none;
     }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .dashboard-layout {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding: 1.5rem 1rem 0.5rem 1rem;
+            flex-direction: column;
+            border-right: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu {
+            flex-direction: row;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 15px;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .sidebar-link {
+            padding: 10px 14px;
+            white-space: nowrap;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 1.5rem 1rem;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.75rem;
+        }
+
+        .admin-profile-wrapper {
+            align-self: flex-start;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .chart-grid {
+            overflow-x: auto;
+            padding-right: 0;
+        }
+
+        .table-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .search-container {
+            width: 100%;
+            max-width: none;
+        }
+
+        .profile-dropdown {
+            right: auto;
+            left: 0;
+            width: 100%;
+            max-width: 280px;
+        }
+        
+        .insights-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
 </style>
 @endsection
 
@@ -1499,13 +1596,11 @@
             <div class="glass-panel stat-card" style="--stat-glow: rgba(236, 72, 153, 0.25);">
                 <div class="stat-icon-wrapper" style="--icon-bg: rgba(236, 72, 153, 0.1); --icon-border: rgba(236, 72, 153, 0.2); --icon-color: #EC4899;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                        <line x1="12" y1="19" x2="12" y2="22"/>
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
                     </svg>
                 </div>
-                <span class="stat-title">Voice Notes Sold</span>
-                <span class="stat-value">{{ $stats['voice_notes'] }}</span>
+                <span class="stat-title">Lampiran Sold</span>
+                <span class="stat-value">{{ $stats['attachments'] }}</span>
                 <span class="stat-change positive">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
                     +5.3% this month
@@ -1680,15 +1775,10 @@
                                             </svg>
                                         </div>
                                         <span style="color: #E2E8F0;">Buat Grup</span>
-                                    @elseif($purchase['feature'] == 'Voice Note' || $purchase['feature'] == 'Sticker Pack')
+                                    @elseif($purchase['feature'] == 'attachment' || $purchase['feature'] == 'Lampiran' || $purchase['feature'] == 'Kirim Lampiran' || $purchase['feature'] == 'Sticker Pack' || $purchase['feature'] == 'Voice Note')
                                         <div class="feature-icon-box" style="background: rgba(236, 72, 153, 0.08); border-color: rgba(236, 72, 153, 0.15);">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                                                <line x1="12" y1="19" x2="12" y2="22"/>
-                                            </svg>
-                                        </div>
-                                        <span style="color: #E2E8F0;">Voice Note</span>
+                                        <span style="color: #E2E8F0;">Kirim Lampiran</span>
                                     @elseif($purchase['feature'] == 'Tema Pro')
                                         <div class="feature-icon-box" style="background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.15);">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
