@@ -8,10 +8,6 @@ mkdir -p storage/framework/{cache,sessions,views}
 mkdir -p storage/logs
 mkdir -p bootstrap/cache
 
-# Set permissions
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R 775 storage bootstrap/cache
-
 # Generate APP_KEY if not set
 if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
@@ -26,5 +22,9 @@ php artisan view:cache
 if [ -n "$DB_HOST" ]; then
     php artisan migrate --force --no-interaction 2>/dev/null || true
 fi
+
+# Fix permissions again after artisan commands might have created files (like laravel.log) as root
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
 
 exec "$@"
