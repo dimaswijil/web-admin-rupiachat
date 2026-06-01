@@ -32,6 +32,7 @@ RUN apk add --no-cache \
     oniguruma-dev \
     libxml2-dev \
     icu-dev \
+    postgresql-dev \
     zip \
     unzip
 
@@ -39,6 +40,8 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
     pdo_mysql \
+    pdo_pgsql \
+    pgsql \
     mbstring \
     exif \
     pcntl \
