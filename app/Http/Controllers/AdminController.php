@@ -143,12 +143,11 @@ class AdminController
             $users = $request->session()->get('crm_users', []);
         }
 
-        // 4. Compute dynamic statistics based on Completed purchases
         $totalRevenue = 0;
         $voiceCallsSold = 0;
         $videoCallsSold = 0;
         $groupAccessSold = 0;
-        $voiceNotesSold = 0;
+        $attachmentsSold = 0;
         $vipMembershipsSold = 0;
 
         foreach ($purchases as $p) {
@@ -161,8 +160,8 @@ class AdminController
                     $videoCallsSold++;
                 } elseif (strtolower($p['feature']) === 'buat grup' || strtolower($p['feature']) === 'group_create') {
                     $groupAccessSold++;
-                } elseif (strtolower($p['feature']) === 'voice note' || strtolower($p['feature']) === 'voice_note' || strtolower($p['feature']) === 'sticker pack' || strtolower($p['feature']) === 'sticker_pack') {
-                    $voiceNotesSold++;
+                } elseif (strtolower($p['feature']) === 'attachment' || strtolower($p['feature']) === 'kirim lampiran' || strtolower($p['feature']) === 'lampiran' || strtolower($p['feature']) === 'voice note' || strtolower($p['feature']) === 'voice_note' || strtolower($p['feature']) === 'sticker pack' || strtolower($p['feature']) === 'sticker_pack') {
+                    $attachmentsSold++;
                 } elseif (strtolower($p['feature']) === 'vip member' || strtolower($p['feature']) === 'vip_member') {
                     $vipMembershipsSold++;
                 }
@@ -177,7 +176,7 @@ class AdminController
             'voice_calls' => number_format($voiceCallsSold, 0, ',', '.'),
             'video_calls' => number_format($videoCallsSold, 0, ',', '.'),
             'group_access' => number_format($groupAccessSold, 0, ',', '.'),
-            'voice_notes' => number_format($voiceNotesSold, 0, ',', '.'),
+            'attachments' => number_format($attachmentsSold, 0, ',', '.'),
             'vip_memberships' => number_format($vipMembershipsSold, 0, ',', '.'),
             'usd_rate' => 'Rp ' . number_format($usdRate, 2, ',', '.'),
             'rate_updated_at' => $rateUpdatedAt
